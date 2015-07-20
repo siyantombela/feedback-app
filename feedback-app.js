@@ -1,5 +1,5 @@
 FeedbackLlist = new Mongo.Collection("feedbackList");
-var appName = "FeedbackNow"
+
 
 if (Meteor.isClient) {
 
