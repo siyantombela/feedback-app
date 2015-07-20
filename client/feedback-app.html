@@ -53,7 +53,7 @@
 <template name="feedback">
 	
 	<a href="#" class="list-group-item">
-	    <h4 class="list-group-item-heading"><small>{{feedbackType}} - by <i>{{addedBy}}</i></small></h4>
+	    <h4 class="list-group-item-heading"><small>{{feedbackType}} - by <i>{{currentUser}}</i></small></h4>
 	    <p class="list-group-item-text">{{feedback}}</p>
   	</a>
 	
@@ -64,7 +64,7 @@
   
 	<div class="alert alert-danger" role="alert">Please enter feedback before submitting the form</div>
 	<form>
-		<p>
+
 		  	<div class="radio">
 				  <label>
 				    <input type="radio" name="feedbackType" id="optionsRadios1" value="Complaint" checked>
@@ -77,11 +77,8 @@
 			    Compliment
 			  </label>
 			</div>
-		</p>
-		<!--<p>-->
-		<!--	<input type="text" placeholder="Name" class="form-control" name="addedBy"/>-->
-		<!--</p>	-->
-	  	<p>
+
+        <p>
 
 	  		<textarea class="form-control" placeholder="Feeback" name="feedback" rows="3"></textarea>
 	  		<span id="helpBlock" class="help-block">Please enter your feeback above</span>
