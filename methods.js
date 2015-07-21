@@ -18,5 +18,9 @@ Meteor.methods({
             addedBy: Meteor.userId(),
             username: Meteor.user().username
         });
+    },
+
+    getLocation: function() {
+        return Geolocation.latLng();
     }
 })

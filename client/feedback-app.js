@@ -1,3 +1,11 @@
+Meteor.subscribe("feedBackList");
+
+//Meteor.startup(function() {
+//    GoogleMaps.load();
+//});
+
+
+
 Template.body.helpers({
     feedBacklist : function () {
         return FeedbackLlist.find({}, {sort: {dateAdded: -1}});
@@ -19,11 +27,34 @@ Template.feedbackForm.events({
         var feedback = event.target.feedback.value;
         var feedbackType = event.target.feedbackType.value;
 
+        var latLng = Geolocation.latLng();
+
+        if(latLng) {
+            var latidute = latLng.lat;
+            var longitude = latLng.lng;
+
+            console.log(longitude);
+
+            var geocoder = new google.maps.Geocoder();
+            var latlng = new google.maps.LatLng(latidute,longitude);
+            console.log("Formatted Lat Long: " + latlng);
+
+            //reverse geocode to get address
+            geocoder.geocode({'location': latlng}, function (results,status) {
+                console.log(status);
+                if (status === google.maps.GeocoderStatus.OK) {
+                    var address = results[1].formatted_address;
+                    console.log("Formatted Address: " + address);
+                }
+
+            })
+
+        }
+
         //Check if feedback was entered first
         if (feedback) {
             Meteor.call("addFeedback", feedback,feedbackType);
         } else {
-            //Otherwise do nothing
             return false;
         }
 
@@ -36,3 +67,4 @@ Template.feedbackForm.events({
 Accounts.ui.config({
     passwordSignupFields: 'USERNAME_ONLY'
 });
+
